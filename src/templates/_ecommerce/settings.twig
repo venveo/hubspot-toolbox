@@ -1,0 +1,36 @@
+{% extends 'hubspot-toolbox/_ecommerce/layout' %}
+{% import "_includes/forms" as forms %}
+
+{% set fullPageForm = true %}
+{% set selectedSidebarItem = 'settings' %}
+
+{% set content %}
+    {{ actionInput('hubspot-toolbox/features/save') }}
+    {{ hiddenInput('feature', feature.handle) }}
+
+    {% namespace 'settings' %}
+        {% set fieldInput %}
+            <div id="storeSelector"></div>
+        {% endset %}
+        {{ forms.field({
+            label: 'HubSpot Store',
+            first: true,
+            name: 'storeId',
+            errors: feature.getErrors('storeId'),
+            instructions: "Select the store referenced in your HubSpot account",
+            id: 'storeId',
+            required: true
+        }, fieldInput) }}
+    {% endnamespace %}
+
+    {% js %}
+        new Craft.HubSpot.StoreSelector({
+        container: '#{{ 'storeSelector'|namespaceInputId('settings') }}',
+        stores: {{ stores|json_encode|raw }},
+        value: {{ feature.storeId|json_encode|raw }},
+        name: {{ 'storeId'|namespaceInputName('settings')|json_encode|raw }}
+        });
+    {% endjs %}
+{% endset %}
+
+{% do craft.app.view.registerAssetBundle('venveo\\hubspottoolbox\\assetbundles\\hubspotcp\\HubSpotCpAsset') %}

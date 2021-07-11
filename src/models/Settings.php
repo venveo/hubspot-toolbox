@@ -10,11 +10,8 @@
 
 namespace venveo\hubspottoolbox\models;
 
-use venveo\hubspottoolbox\HubSpotToolbox;
-
-use Craft;
 use craft\base\Model;
-use craft\validators\ArrayValidator;
+use craft\behaviors\EnvAttributeParserBehavior;
 
 /**
  * HubspotToolbox Settings Model
@@ -32,71 +29,37 @@ use craft\validators\ArrayValidator;
  */
 class Settings extends Model
 {
-    // Public Properties
-    // =========================================================================
 
-    /**
-     * Some field model attribute
-     *
-     * @var string
-     */
-    public $hubspotPortalId = '';
+    public $appId = '';
+    public $clientId = '';
+    public $clientSecret = '';
+    public $apiKey = '';
+    public $devApiKey = '';
 
-    public $apps;
-    public $defaultApp;
 
-    // Public Methods
-    // =========================================================================
-
-    public function init()
+    public function behaviors()
     {
-        parent::init();
+        $behaviors = parent::behaviors();
+        $behaviors['parser'] = [
+            'class' => EnvAttributeParserBehavior::class,
+            'attributes' => [
+                'appId',
+                'clientId',
+                'clientSecret',
+                'apiKey',
+                'devApiKey',
+            ],
+        ];
+        return $behaviors;
     }
+
     /**
-     * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
      * @return array
      */
     public function rules()
     {
         return [
-            ['hubspotPortalId', 'required'],
-            ['apps', ArrayValidator::class],
+            [['appId', 'clientId', 'clientSecret', 'devApiKey', 'apiKey'], 'required']
         ];
-    }
-
-    public function getApps() {
-        $apps = [];
-        foreach($this->apps as $handle => $config) {
-            $app = new HubSpotApp($config);
-            $app->handle = $handle;
-            $apps[] = $app;
-        }
-
-        return $apps;
-    }
-
-    /**
-     * @param $handle
-     * @return mixed
-     */
-    public function getAppByHandle($handle) {
-        if (array_key_exists($handle, $this->apps)) {
-            $app = new HubSpotApp($this->apps[$handle]);
-            $app->handle = $handle;
-            return $app;
-        }
-
-        return null;
-    }
-
-    public function getDefaultApp() {
-        if (!$this->defaultApp) return null;
-        return $this->getAppByHandle($this->defaultApp);
     }
 }

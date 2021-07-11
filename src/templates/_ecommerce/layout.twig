@@ -1,0 +1,39 @@
+{% extends '_layouts/cp.html' %}
+
+{% set title = title|default('HubSpot Ecommerce') %}
+{% set selectedSubnavItem = 'ecommerce' %}
+
+{% set sidebarItems = {
+    settings: {
+        label: 'Settings',
+        url: 'settings'
+    },
+    ('contact-properties'): {
+        label: 'Contact Properties',
+        url: 'contact-properties'
+    },
+    ('deal-properties'): {
+        label: 'Deal Properties',
+        url: 'deal-properties'
+    },
+    ('lineitem-properties'): {
+        label: 'Line Item Properties',
+        url: 'lineitem-properties'
+    },
+    ('product-properties'): {
+        label: 'Product Properties',
+        url: 'product-properties'
+    }
+} %}
+
+{% set selectedSidebarItem = selectedSidebarItem|default('settings') %}
+
+{% block sidebar %}
+    <nav>
+        <ul>
+            {% for k,v in sidebarItems %}
+                <li><a href="{{ v.url }}" {% if k == selectedSidebarItem %}class="sel"{% endif %}><span class="label">{{ v.label }}</span></a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}

@@ -13,7 +13,7 @@ namespace venveo\hubspottoolbox\variables;
 use venveo\hubspottoolbox\HubSpotToolbox;
 
 use Craft;
-use venveo\hubspottoolbox\services\HubSpotService;
+use venveo\hubspottoolbox\services\hubspot\ContactsService;
 
 /**
  * HubSpot Toolbox Variable
@@ -43,7 +43,7 @@ class HubspotVariable
      */
     public function isContact()
     {
-        return HubSpotToolbox::$plugin->getHubSpotService()->isContact();
+        return HubSpotToolbox::$plugin->hubspot->isContact();
     }
 
 

@@ -1,0 +1,40 @@
+{% extends 'hubspot-toolbox/_connection/layout' %}
+
+{# @var resourceOwner \venveo\hubspottoolbox\oauth\providers\HubSpotResourceOwner #}
+{% set content %}
+    {% if token and resourceOwner %}
+        <div class="readable">
+            <table class="data fullwidth fixed-layout">
+                <tbody>
+                <tr>
+                    <th class="light">HubSpot Domain</th>
+                    <td>{{ resourceOwner.hubSpotDomain }}</td>
+                </tr>
+                <tr>
+                    <th class="light">Token Owner</th>
+                    <td>{{ resourceOwner.email }}</td>
+                </tr>
+                <tr>
+                    <th class="light">Portal ID</th>
+                    <td>{{ resourceOwner.hubId }}</td>
+                </tr>
+                <tr>
+                    <th class="light">App ID</th>
+                    <td>{{ resourceOwner.appId }}</td>
+                </tr>
+                <tr>
+                    <th class="light">Authorized Scopes</th>
+                    <td>{{ resourceOwner.scopes|join(', ') }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>Click the "Connect" button to get your first token!</p>
+    {% endif %}
+    <hr>
+    {% if token and resourceOwner %}
+        <a href="{{ actionUrl('hubspot-toolbox/connection/deauthorize') }}" class="btn">Disconnect</a>
+    {% endif %}
+    <a href="{{ actionUrl('hubspot-toolbox/connection/authorize') }}" class="btn submit">Connect</a>
+{% endset %}

@@ -1,0 +1,54 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.autosuggestField({
+    label: "HubSpot App ID"|t('hubspot-toolbox'),
+    id: 'appId',
+    first: true,
+    name: 'appId',
+    required: true,
+    errors: settings.getErrors('appId'),
+    value: settings.appId,
+    suggestEnvVars: true
+}) }}
+
+{{ forms.autosuggestField({
+    label: "HubSpot Client ID"|t('hubspot-toolbox'),
+    id: 'clientId',
+    name: 'clientId',
+    required: true,
+    errors: settings.getErrors('clientId'),
+    value: settings.clientId,
+    suggestEnvVars: true
+}) }}
+
+{{ forms.autosuggestField({
+    label: "HubSpot Client Secret"|t('hubspot-toolbox'),
+    id: 'clientSecret',
+    name: 'clientSecret',
+    required: true,
+    errors: settings.getErrors('clientSecret'),
+    value: settings.clientSecret,
+    suggestEnvVars: true
+}) }}
+
+{{ forms.autosuggestField({
+    label: "HubSpot Portal API Key"|t('hubspot-toolbox'),
+    instructions: "Enter the API key for your HubSpot portal."|t('hubspot-toolbox'),
+    id: 'apiKey',
+    name: 'apiKey',
+    required: true,
+    errors: settings.getErrors('apiKey'),
+    value: settings.apiKey,
+    suggestEnvVars: true
+}) }}
+
+{{ forms.autosuggestField({
+    label: "HubSpot Developer API Key"|t('hubspot-toolbox'),
+    instructions: "Enter the API key for your developer account that has access to the OAuth app. This is NOT the portal API key."|t('hubspot-toolbox'),
+    id: 'devApiKey',
+    name: 'devApiKey',
+    required: true,
+    errors: settings.getErrors('devApiKey'),
+    value: settings.devApiKey,
+    suggestEnvVars: true
+}) }}

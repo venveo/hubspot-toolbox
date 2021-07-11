@@ -1,5 +1,5 @@
 {
-    "name": "venveo/hubspot-toolbox",
+    "name": "venveo/craft-hubspot-toolbox",
     "description": "Turnkey HubSpot integration for CraftCMS",
     "type": "craft-plugin",
     "version": "1.0.0-beta3",
@@ -11,8 +11,8 @@
         "hubspot toolbox"
     ],
     "support": {
-        "docs": "https://github.com/venveo/hubspot-toolbox/blob/master/README.md",
-        "issues": "https://github.com/venveo/hubspot-toolbox/issues"
+        "docs": "https://github.com/venveo/craft-hubspot-toolbox/blob/master/README.md",
+        "issues": "https://github.com/venveo/craft-hubspot-toolbox/issues"
     },
     "license": "MIT",
     "authors": [
@@ -23,8 +23,7 @@
     ],
     "require": {
         "craftcms/cms": "^3.0.0",
-        "ryanwinchester/hubspot-php": "~1.0",
-        "flipboxdigital/oauth2-hubspot": "^1.0"
+        "hubspot/hubspot-php": "^3.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -34,12 +33,7 @@
     "extra": {
         "name": "HubSpot Toolbox",
         "handle": "hubspot-toolbox",
-        "hasCpSettings": true,
-        "hasCpSection": true,
-        "changelogUrl": "https://raw.githubusercontent.com/venveo/hubspot-toolbox/master/CHANGELOG.md",
-        "components": {
-            "hubSpotService": "venveo\\hubspottoolbox\\services\\HubSpotService"
-        },
+        "changelogUrl": "https://raw.githubusercontent.com/venveo/craft-hubspot-toolbox/master/CHANGELOG.md",
         "class": "venveo\\hubspottoolbox\\HubSpotToolbox"
     }
 }

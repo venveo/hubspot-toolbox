@@ -1,0 +1,8 @@
+{# @var \craft\commerce\elements\Order order #}
+{# @var \venveo\hubspottoolbox\entities\ecommerce\ExternalObjectStatus syncStatus #}
+<div id="meta" class="meta read-only">
+    <div class="data">
+        <h5 class="heading">HubSpot Sync Status</h5>
+        <p class="value">{{ syncStatus.lastProcessedAt ? craft.app.formatter.asRelativeTime(syncStatus.lastProcessedAt) : 'Never' }}</p>
+    </div>
+</div>

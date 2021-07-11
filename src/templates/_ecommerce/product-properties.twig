@@ -1,0 +1,19 @@
+{% extends 'hubspot-toolbox/_ecommerce/layout' %}
+{% import "_includes/forms" as forms %}
+
+{% set selectedSidebarItem = 'product-properties' %}
+
+{% set content %}
+    <div id="field-mapper"></div>
+    {% js %}
+    new Craft.HubSpot.FieldMapper({
+        container: '#field-mapper',
+        props: {
+            mapper: 'venveo\\hubspottoolbox\\propertymappers\\EcommerceProduct',
+            sourceTypeId: null
+        }
+    });
+    {% endjs %}
+{% endset %}
+
+{% do craft.app.view.registerAssetBundle('venveo\\hubspottoolbox\\assetbundles\\hubspotcp\\HubSpotCpAsset') %}
